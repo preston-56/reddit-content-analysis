@@ -6,7 +6,7 @@ class Analysis(models.Model):
     summary = models.TextField()
 
     class Meta:
-        app_label = 'reddit'  # Specify the app label
+        app_label = 'reddit'
 
     def __str__(self):
         return f"Analysis of {self.subreddit} at {self.timestamp}"

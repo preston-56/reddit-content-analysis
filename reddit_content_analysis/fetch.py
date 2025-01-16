@@ -1,6 +1,6 @@
 import requests
 from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
+from langchain.schema.runnable import RunnableSequence
 from langchain_openai import OpenAI
 from typing import List, Dict
 from dotenv import load_dotenv
@@ -71,10 +71,10 @@ def analyze_posts(posts: List[Dict]) -> Dict:
     prompt = PromptTemplate(input_variables=["content"], template=template)
 
     # Use LLMChain for chaining
-    chain = LLMChain(llm=llm, prompt=prompt)
+    chain = RunnableSequence(prompt | llm)
 
     try:
-        langchain_summary = chain.run({"content": content})
+       langchain_summary = chain.invoke({"content": content})
     except Exception as e:
         # Handle insufficient quota error
         if "insufficient_quota" in str(e):

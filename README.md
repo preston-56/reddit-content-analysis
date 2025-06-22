@@ -48,18 +48,41 @@ GET  /docs          # API docs
 GET  /admin         # Admin panel
 ```
 
-## Example Usage
+## API Playground
 
+**Python Client:**
+```python
+import requests
+
+# Generate Reddit post
+response = requests.post("http://localhost:8000/v1/generate/",
+    json={"subreddit": "python"})
+print(response.json())
+
+# Analyze text sentiment
+response = requests.post("http://localhost:8000/v1/analyze/",
+    json={"text": "FastAPI is amazing!"})
+print(response.json())
+```
+
+**FastAPI Interactive Docs:**
 ```bash
-# Generate post
+# Start server and visit interactive API docs
+uvicorn fastapi_app.main:app --reload
+# Open http://localhost:8000/docs
+```
+
+**cURL Commands:**
+```bash
+# Generate post suggestion
 curl -X POST "http://localhost:8000/v1/generate/" \
      -H "Content-Type: application/json" \
-     -d '{"subreddit": "python"}'
+     -d '{"subreddit": "programming"}'
 
-# Analyze sentiment
+# Sentiment analysis
 curl -X POST "http://localhost:8000/v1/analyze/" \
      -H "Content-Type: application/json" \
-     -d '{"text": "I love programming!"}'
+     -d '{"text": "This API rocks!"}'
 ```
 
 ## Tech Stack

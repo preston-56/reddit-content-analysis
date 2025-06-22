@@ -16,3 +16,6 @@ db.sqlite3
 
 # Environment variables
 .env
+
+# Ignore collected static files
+/staticfiles/
